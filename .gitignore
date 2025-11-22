@@ -210,4 +210,10 @@ __marimo__/
 .DS_Store
 
 #data files
-Gesture\ Data/
+datasets/
+
+#vscode
+.vscode/
+
+#svmModels
+svmModels/
