@@ -127,7 +127,6 @@ def extract_features_from_spectrogram_advanced(
     features = np.concatenate(
         [
             [mean_val, var_val, skew_val, kurtosis_val],
-            # micro_doppler_features, |deprecated v2 version
             average_over_time_and_frequency_bins,
             cwt_mean,
             cwt_var,
