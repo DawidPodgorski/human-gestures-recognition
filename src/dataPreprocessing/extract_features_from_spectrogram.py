@@ -85,6 +85,27 @@ def renyi_entropy(TFR, alpha=3, t=None, f=None):
     return Ren
 
 
+def wave_test(cwt_matrix):
+    import matplotlib.pyplot as plt
+
+    plt.figure(figsize=(12, 6))
+
+    # extent ustawiamy tak, aby osie odpowiadały rzeczywistym indeksom
+    # aspect='auto' jest kluczowe, bo sygnał jest pewnie bardzo długi, a szerokości tylko 30
+    plt.imshow(
+        cwt_matrix,
+        extent=[0, cwt_matrix.shape[1], 1, 30],
+        cmap="jet",
+        aspect="auto",
+        origin="lower",
+    )
+    plt.colorbar(label="Współczynnik falkowy (moc odpowiedzi)")
+    plt.ylabel("Szerokość falki (Skala)")
+    plt.xlabel("Czas (indeks próbki po spłaszczeniu)")
+    plt.title("Skalogram (CWT) - Wynik transformacji falkowej")
+    plt.show()
+
+
 def extract_features_from_spectrogram_advanced(
     spectrogram_data,
 ):
@@ -115,6 +136,7 @@ def extract_features_from_spectrogram_advanced(
     # Wavelet Transform
     widths = np.arange(1, 31)
     cwt_matr = cwt(normalized_spectrogram_data.flatten(), ricker, widths)
+    # wave_test(cwt_matr)
     cwt_mean = np.mean(cwt_matr, axis=1)
     cwt_var = np.var(cwt_matr, axis=1)
 

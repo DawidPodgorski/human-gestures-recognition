@@ -19,6 +19,7 @@ def run_default(
     validation_accuracy = model.score(data_val, labels_val)
     end_time = time.time()
     elapsed_time = end_time - start_time
+    predictions = model.predict(data_test)
     test_accuracy = model.score(data_test, labels_test)
 
     return {
@@ -26,4 +27,5 @@ def run_default(
         "test_accuracy": float(test_accuracy),
         "elapsed_time": elapsed_time,
         "svm_params": [C_PARAM, SCALE_GAMMA_PARAM],
+        "predictions": predictions,
     }

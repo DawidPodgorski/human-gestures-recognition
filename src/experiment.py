@@ -5,7 +5,7 @@ from dataPreprocessing.get_test_dataset_for_svm import get_test_dataset_for_svm
 from dataPreprocessing.get_training_dataset_for_svm import get_training_dataset_for_svm
 from run_algorithms import run_default
 from sklearn.model_selection import train_test_split
-from tools import get_gamma_param, save_data_pickle
+from tools import get_gamma_param, save_data_pickle, show_confusion_matrix
 import constants
 from datetime import datetime
 from sklearn import svm
@@ -79,6 +79,12 @@ class Experiment:
         print(f"Test Accuracy: {self.default_results['test_accuracy']:.4f}")
         print(f"Elapsed Time: {self.default_results['elapsed_time']:.4f} seconds")
         print(f"SVM Parameters (C, gamma): {self.default_results['svm_params']}\n")
+        print("Displaying Confusion Matrix...")
+        show_confusion_matrix(
+            test_data=self.test_labels,
+            predictions=self.default_results["predictions"],
+            model_name="Default SVM",
+        )
 
     def run_experiment(
         self,
